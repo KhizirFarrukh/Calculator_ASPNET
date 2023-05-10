@@ -1,0 +1,45 @@
+﻿@model Calculator.Models.CalculatorViewModel
+
+@{
+    ViewData["Title"] = "Calculator";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center">@ViewData["Title"]</h1>
+            <hr />
+            @using (Html.BeginForm())
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Number1, htmlAttributes: new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Number1, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Number2, htmlAttributes: new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Number2, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Operation, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.Operation,
+                        Model.OperationList.Select(x => new SelectListItem { Text = x, Value = x }),
+                        "", new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Calculate</button>
+                </div>
+
+                <div class="form-group">
+                    @if (Model.Result.HasValue)
+                    {
+                        <h3 class="text-center">Result:</h3>
+                        <h2 class="text-center">@Model.Result.Value</h2>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
